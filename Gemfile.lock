@@ -1,0 +1,13 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    scientist (1.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  scientist
+
+BUNDLED WITH
+   1.11.2
