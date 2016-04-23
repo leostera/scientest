@@ -25,19 +25,22 @@ end
 
 puts "Running 3 tests with factor #{factor}..."
 
-tests = [
+def benchmark tasks
+  tasks.map do |t|
+    t[:time] = measure t[:name], t[:predicate]
+    p t
+    t
+  end.sort_by do |t|
+    t[:time]
+  end
+
+  puts ">> Fastest run: "
+  p tasks.first
+  tasks
+end
+
+benchmark [
   {name: :candidate, predicate: -> { science_test dummy, dummy } },
   {name: :candidate_no_try, predicate: -> { science_test dummy } },
   {name: :control, predicate: -> { dummy } }
-].map do |t|
-  t[:time] = measure t[:name], t[:predicate]
-  p t
-  t
-end.sort_by do |t|
-  t[:time]
-end
-
-puts ">> Fastest run: "
-p tests.first
-
-puts "done."
+]
