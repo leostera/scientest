@@ -23,9 +23,9 @@ def measure name, block
   finish-start
 end
 
-puts "Running 3 tests with factor #{factor}..."
 
 def benchmark tasks
+  puts "Running #{tasks.length} test(s) with factor #{factor}..."
   tasks.map do |t|
     t[:time] = measure t[:name], t[:predicate]
     p t
