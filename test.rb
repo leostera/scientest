@@ -16,16 +16,26 @@ def science_test use, try=nil
   e.run
 end
 
-def measure name, &block
+def measure name, block
   start = Time.now.to_f
   block.call
   finish = Time.now.to_f
-  delta = finish-start
-  p [name, start, finish, delta]
-  delta
+  finish-start
 end
 
-p [:name, :start_time, :finish_time, :total_run_time]
-measure "science" do science_test dummy, dummy end
-measure "science (no_try)" do science_test dummy end
-measure "dummy" do dummy end
+puts "Running 3 tests with factor #{factor}..."
+
+tests = [
+  {name: :candidate, predicate: -> { science_test dummy, dummy } },
+  {name: :candidate_no_try, predicate: -> { science_test dummy } },
+  {name: :control, predicate: -> { dummy } }
+].map do |t|
+  t[:time] = measure t[:name], t[:predicate]
+  p t
+  t
+end.sort_by do |t|
+  t[:time]
+end
+
+puts " >> Fastest run: "
+p tests.first
