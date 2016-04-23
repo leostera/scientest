@@ -5,7 +5,7 @@ I was just curious whether the experiments were being run in serial or parallel 
 
 For full disclosure, you may read the source for the test, but it really is just mapping over a sequence and incrementing each number:
 
-```
+```ruby
 (0...100000*factor).map(&:next)
 ```
 
@@ -13,8 +13,8 @@ Here are the results of running this test for a factor of 1, 10, 100, 1000, and 
 
 > Note: I ommitted the `:predicate` element of the hash to make this more readable:
 
-```
-repos/scientest λ for factor in 1 10 100 1000 10000; do ruby test.rb $factor; echo "\n";  done
+```zsh
+repos/scientest λ for factor in 1 10 100 1000 10000; do ruby test.rb $factor; echo "";  done
 Running 3 tests with factor 1...
 {:name=>:candidate, :time=>0.06157207489013672}
 {:name=>:candidate_no_try, :time=>0.0072209835052490234}
@@ -22,7 +22,6 @@ Running 3 tests with factor 1...
 >> Fastest run:
 {:name=>:candidate_no_try, :time=>0.0072209835052490234}
 done.
-
 
 Running 3 tests with factor 10...
 {:name=>:candidate, :time=>0.6277220249176025}
@@ -32,7 +31,6 @@ Running 3 tests with factor 10...
 {:name=>:candidate_no_try, :time=>0.07044363021850586}
 done.
 
-
 Running 3 tests with factor 100...
 {:name=>:candidate, :time=>6.157206773757935}
 {:name=>:candidate_no_try, :time=>0.7435848712921143}
@@ -41,7 +39,6 @@ Running 3 tests with factor 100...
 {:name=>:control, :time=>0.7296631336212158}
 done.
 
-
 Running 3 tests with factor 1000...
 {:name=>:candidate, :time=>62.13065814971924}
 {:name=>:candidate_no_try, :time=>7.286419868469238}
@@ -49,7 +46,6 @@ Running 3 tests with factor 1000...
 >> Fastest run:
 {:name=>:control, :time=>7.236094951629639}
 done.
-
 
 Running 3 tests with factor 10000...
 {:name=>:candidate, :time=>725.5188598632812}
