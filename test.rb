@@ -1,25 +1,26 @@
-require "date"
+require "time"
 require "scientist"
 
 def dummy
-  (0...1000).map do |i| i+1 end
-  true
+  (0...100000000).map do |i| i+1 end
 end
 
-def science_test
+def science_test use, try=nil
   e = Scientist::Experiment.new("is_science_slow?")
-  e.use do dummy end
-  e.try do dummy end
+  e.use do use end
+  e.try do try end if try
   e.run
 end
 
-def measure name, block
-  start = DateTime.now
+def measure name, &block
+  start = Time.now.to_f
   block.call
-  finish = DateTime.now
+  finish = Time.now.to_f
   delta = finish-start
   p [name, start, finish, delta]
 end
 
-measure "dummy", method(:dummy)
-measure "science", method(:science_test)
+p [:name, :start_time, :finish_time, :total_run_time]
+measure "dummy" do dummy end
+measure "science" do science_test dummy, dummy end
+measure "science (no_try)" do science_test dummy end
