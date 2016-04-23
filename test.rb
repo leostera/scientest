@@ -37,5 +37,7 @@ end.sort_by do |t|
   t[:time]
 end
 
-puts " >> Fastest run: "
+puts ">> Fastest run: "
 p tests.first
+
+puts "done."
